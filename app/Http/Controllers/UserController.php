@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.criar');
     }
 
     /**
@@ -38,7 +38,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = new User();
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = bcrypt($request->password);
+        $usuario->save();
+        return redirect()->route('user.index');
     }
 
     /**
@@ -60,7 +65,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::where('id', $id)->first();
+        return view('usuarios.editar', [
+            'usuario' => $usuario
+        ]);
+
     }
 
     /**
@@ -72,7 +81,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $usuario = User::where('id', $id)->first();
+       $usuario->name = $request->name;
+       $usuario->email = $request->email;
+       if(!empty($request->password)){
+            $usuario->password = bcrypt($request->password);
+       }
+       $usuario->save();
+       return redirect()->route('user.index');
     }
 
     /**
