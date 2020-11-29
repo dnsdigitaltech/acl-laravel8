@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <a class="text-success" href="{{ route('user.create') }}">&plus; Cadastrar Usuário</a>
+                        <a class="text-success" href="{{ route('permission.create') }}">&plus; Cadastrar Permissão</a>
 
                         @if($errors)
                             @foreach($errors->all() as $error)
@@ -34,14 +34,14 @@
                             </thead>
                             <tbody>
 
-                                @foreach($usuarios as $usuario)
+                                @foreach($permissoes as $permissao)
                                 <tr>
-                                    <td>{{ $usuario->id }}</td>
-                                    <td>{{ $usuario->name }}</td>
+                                    <td>{{ $permissao->id }}</td>
+                                    <td>{{ $permissao->name }}</td>
                                     <td class="d-flex">
-                                        <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('user.edit', ['user' => $usuario->id]) }}">Editar</a>
+                                        <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('permission.edit', ['permission' => $permissao->id]) }}">Editar</a>
                                         <a class="mr-3 btn btn-sm btn-outline-info" href="">Perfis</a>
-                                        <form action="{{ route('user.destroy', ['user' => $usuario->id]) }}" method="post">
+                                        <form action="{{ route('permission.destroy', ['permission' => $permissao->id]) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <input class="btn btn-sm btn-outline-danger" type="submit" value="Remover">
