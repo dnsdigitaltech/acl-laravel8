@@ -40,7 +40,6 @@
                                     <td>{{ $permissao->name }}</td>
                                     <td class="d-flex">
                                         <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('permission.edit', ['permission' => $permissao->id]) }}">Editar</a>
-                                        <a class="mr-3 btn btn-sm btn-outline-info" href="">Perfis</a>
                                         <form action="{{ route('permission.destroy', ['permission' => $permissao->id]) }}" method="post">
                                             @csrf
                                             @method('delete')

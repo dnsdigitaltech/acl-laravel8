@@ -23,6 +23,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('user', App\Http\Controllers\UserController::class);
 
+Route::get('role/{role}/permissions', [App\Http\Controllers\RoleController::class , 'permissions'])->name('role.permissions');
+Route::put('role/{role}/permissions/sync', [App\Http\Controllers\RoleController::class , 'permissionsSync'])->name('role.permissions.sync');
 Route::resource('role', App\Http\Controllers\RoleController::class);
 
 Route::resource('permission', App\Http\Controllers\PermissionController::class);

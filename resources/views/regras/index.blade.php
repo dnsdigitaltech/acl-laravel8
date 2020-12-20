@@ -40,7 +40,7 @@
                                     <td>{{ $regra->name }}</td>
                                     <td class="d-flex">
                                         <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('role.edit', ['role' => $regra->id]) }}">Editar</a>
-                                        <a class="mr-3 btn btn-sm btn-outline-info" href="">Permissões</a>
+                                        <a class="mr-3 btn btn-sm btn-outline-info" href="{{ route('role.permissions',['role' => $regra->id]) }}">Permissões</a>
                                         <form action="{{ route('role.destroy', ['role' => $regra->id]) }}" method="post">
                                             @csrf
                                             @method('delete')

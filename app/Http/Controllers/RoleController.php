@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -94,5 +95,40 @@ class RoleController extends Controller
         $role = Role::where('id', $id)->first();
         $role->delete();
         return redirect(route('role.index'));
+    }
+
+    public function permissions($role)
+    {
+       $regra = Role::where('id',$role)->first();
+       $permissoes = Permission::all();
+       foreach($permissoes as $permissao){
+           //trazer as permissões do perfil
+            if($regra->hasPermissionTo($permissao->name)){
+                $permissao->can = true;
+            }else{
+                $permissao->can = false;
+            }
+       }
+       return view('regras.permissoes',[
+           'regra' => $regra,
+           'permissoes' => $permissoes
+       ]);
+    }
+
+    public function permissionsSync(Request $request, $role)
+    {
+        $permissionsRequest  = $request->except(['_token', '_method']);
+        foreach($permissionsRequest as $key => $value){
+            $permissoes[] = Permission::where('id', $key)->first();
+        }
+        
+        $regra = Role::where('id', $role)->first();
+        if(!empty($permissoes)){
+            $regra->syncPermissions($permissoes); //caso existir informa um vetor de opções
+        }else{
+            $regra->syncPermissions($permissoes);//caso nao existir informa null
+        }
+
+        return redirect()->route('role.permissions', ['role' => $regra->id]);
     }
 }
