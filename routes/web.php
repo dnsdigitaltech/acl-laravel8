@@ -30,3 +30,14 @@ Route::put('role/{role}/permissions/sync', [App\Http\Controllers\RoleController:
 Route::resource('role', App\Http\Controllers\RoleController::class);
 
 Route::resource('permission', App\Http\Controllers\PermissionController::class);
+
+Route::get('/post', [App\Http\Controllers\PostController::class,'index'])->name('post.index');
+
+Route::get('/post/create', [App\Http\Controllers\PostController::class,'create'])->name('post.create');
+Route::post('/post', [App\Http\Controllers\PostController::class,'store'])->name('post.store');
+
+Route::match(['put', 'patch'], '/post/{post}', [App\Http\Controllers\PostController::class,'update'])->name('post.update');
+
+Route::get('/post/{post}', [App\Http\Controllers\PostController::class,'show'])->name('post.show');
+Route::delete('/post/{post}', [App\Http\Controllers\PostController::class,'destroy'])->name('post.destroy');
+Route::get('/post/{post}/edit', [App\Http\Controllers\PostController::class,'edit'])->name('post.edit');
