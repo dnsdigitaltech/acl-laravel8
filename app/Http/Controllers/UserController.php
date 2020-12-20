@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -103,5 +104,39 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index');
+    }
+
+    public function roles($user)
+    {
+       $usuario = User::where('id',$user)->first();
+       $regras = Role::all();
+       foreach($regras as $regra){
+           //trazer as regras do usuario
+            if($usuario->hasRole($regra->name)){
+                $regra->can = true;
+            }else{
+                $regra->can = false;
+            }
+       }
+       return view('usuarios.regras',[
+           'usuario' => $usuario,
+           'regras' => $regras
+       ]);
+    }
+
+    public function rolesSync(Request $request, $user)
+    {
+        $rolesRequest  = $request->except(['_token', '_method']);
+        foreach($rolesRequest as $key => $value){
+            $regras[] = Role::where('id', $key)->first();
+        }
+        $usuario = User::where('id', $user)->first();
+        if(!empty($regras)){
+            $usuario->syncRoles($regras); //caso existir informa um vetor de opções
+        }else{
+            $usuario->syncRoles(null);//caso nao existir informa null
+        }
+
+        return redirect()->route('user.roles', ['user' => $usuario->id]);
     }
 }

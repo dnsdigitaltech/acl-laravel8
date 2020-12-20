@@ -126,7 +126,7 @@ class RoleController extends Controller
         if(!empty($permissoes)){
             $regra->syncPermissions($permissoes); //caso existir informa um vetor de opções
         }else{
-            $regra->syncPermissions($permissoes);//caso nao existir informa null
+            $regra->syncPermissions(null);//caso nao existir informa null
         }
 
         return redirect()->route('role.permissions', ['role' => $regra->id]);
