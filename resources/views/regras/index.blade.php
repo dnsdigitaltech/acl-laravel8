@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <a class="text-success" href="{{ route('user.create') }}">&plus; Cadastrar Usuário</a>
+                        <a class="text-success" href="{{ route('role.create') }}">&plus; Cadastrar Perfil</a>
 
                         @if($errors)
                             @foreach($errors->all() as $error)
@@ -28,20 +28,20 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Usuário</th>
+                                <th>Perfis</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                                @foreach($usuarios as $usuario)
+                                @foreach($regras as $regra)
                                 <tr>
-                                    <td>{{ $usuario->id }}</td>
-                                    <td>{{ $usuario->name }}</td>
+                                    <td>{{ $regra->id }}</td>
+                                    <td>{{ $regra->name }}</td>
                                     <td class="d-flex">
-                                        <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('user.edit', ['user' => $usuario->id]) }}">Editar</a>
+                                        <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('role.edit', ['role' => $regra->id]) }}">Editar</a>
                                         <a class="mr-3 btn btn-sm btn-outline-info" href="">Perfis</a>
-                                        <form action="{{ route('user.destroy', ['user' => $usuario->id]) }}" method="post">
+                                        <form action="{{ route('user.destroy', ['user' => $regra->id]) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <input class="btn btn-sm btn-outline-danger" type="submit" value="Remover">

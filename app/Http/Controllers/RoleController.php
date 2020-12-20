@@ -15,7 +15,6 @@ class RoleController extends Controller
     public function index()
     {
         $regras = Role::all();
-
         return view('regras.index', ['regras' => $regras]);
     }
 

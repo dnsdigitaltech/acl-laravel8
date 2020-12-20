@@ -9,7 +9,7 @@
 
                     <div class="card-body">
 
-                        <a class="text-success" href="{{ 'role.index' }}">&leftarrow; Voltar para a listagem</a>
+                        <a class="text-success" href="{{ route('role.index') }}">&leftarrow; Voltar para a listagem</a>
 
                         @if($errors)
                             @foreach($errors->all() as $error)
