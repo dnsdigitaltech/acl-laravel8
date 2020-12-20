@@ -28,7 +28,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Perfis</th>
+                                <th>Nome</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
@@ -40,8 +40,8 @@
                                     <td>{{ $regra->name }}</td>
                                     <td class="d-flex">
                                         <a class="mr-3 btn btn-sm btn-outline-success" href="{{ route('role.edit', ['role' => $regra->id]) }}">Editar</a>
-                                        <a class="mr-3 btn btn-sm btn-outline-info" href="">Perfis</a>
-                                        <form action="{{ route('user.destroy', ['user' => $regra->id]) }}" method="post">
+                                        <a class="mr-3 btn btn-sm btn-outline-info" href="">Permissões</a>
+                                        <form action="{{ route('role.destroy', ['role' => $regra->id]) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <input class="btn btn-sm btn-outline-danger" type="submit" value="Remover">
