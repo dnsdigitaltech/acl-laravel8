@@ -84,6 +84,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if(!Auth::user()->hasPermissionTo('Editar Artigo')){
+            throw new UnauthorizedException('403', 'Você não tem permissão para acessar esta parte');
+        }
         return view('posts.edit', [
             'post' => $post
         ]);
@@ -98,6 +101,9 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if(!Auth::user()->hasPermissionTo('Editar Artigo')){
+            throw new UnauthorizedException('403', 'Você não tem permissão para acessar esta parte');
+        }
         $post->title = $request->title;
         $post->content = $request->content;
 
@@ -119,6 +125,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if(!Auth::user()->hasPermissionTo('Remover Artigo')){
+            throw new UnauthorizedException('403', 'Você não tem permissão para acessar esta parte');
+        }
         $post->delete();
         return redirect()->route('post.index');
     }
