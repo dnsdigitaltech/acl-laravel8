@@ -31,7 +31,7 @@ Route::resource('role', App\Http\Controllers\RoleController::class);
 
 Route::resource('permission', App\Http\Controllers\PermissionController::class);
 
-Route::get('/post', [App\Http\Controllers\PostController::class,'index'])->name('post.index');
+Route::get('/post', [App\Http\Controllers\PostController::class,'index'])->name('post.index')->middleware(['role_or_permission:Listagem de Artigo|Administrador']);
 
 Route::get('/post/create', [App\Http\Controllers\PostController::class,'create'])->name('post.create');
 Route::post('/post', [App\Http\Controllers\PostController::class,'store'])->name('post.store');
