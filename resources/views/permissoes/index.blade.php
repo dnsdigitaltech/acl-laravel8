@@ -28,7 +28,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Usuário</th>
+                                <th>Nome</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
